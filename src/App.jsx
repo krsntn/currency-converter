@@ -14,8 +14,8 @@ import useDebounce from "./useDebounce";
 
 const App = () => {
   const [inputValue, setInputValue] = useState(1000);
-  const [rate, setRate] = useState(1);
-  const [gap, setGap] = useState(1);
+  const [rate, setRate] = useState(2);
+  const [gap, setGap] = useState(10);
   const [tableValues, setTableValues] = useState([]);
 
   const debouncedInputValue = useDebounce(inputValue, 600);
@@ -30,8 +30,14 @@ const App = () => {
       : "light";
     root.classList.add(systemTheme);
 
+    const localValue = localStorage.getItem("value");
+    if (localValue) setInputValue(localValue);
+
     const localRate = localStorage.getItem("rate");
     if (localRate) setRate(localRate);
+
+    const localGap = localStorage.getItem("gap");
+    if (localGap) setGap(localGap);
   }, []);
 
   useEffect(() => {
@@ -48,6 +54,12 @@ const App = () => {
 
     setTableValues(arr);
   }, [debouncedInputValue, debouncedRateValue, debouncedGapValue]);
+
+  const inputValueChanged = (event) => {
+    const { value } = event.target;
+    localStorage.setItem("value", value);
+    setInputValue(value);
+  };
 
   const rateChanged = (event) => {
     const { value } = event.target;
@@ -79,7 +91,7 @@ const App = () => {
           type="number"
           inputMode="decimal"
           value={inputValue}
-          onChange={(event) => setInputValue(event.target.value)}
+          onChange={inputValueChanged}
           className="text-center text-lg h-14"
         />
       </div>
