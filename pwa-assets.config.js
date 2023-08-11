@@ -5,5 +5,5 @@ import {
 
 export default defineConfig({
   preset,
-  images: ["public/logo.svg", "public-dev/logo.svg"],
+  images: ["public/logo.svg"],
 });
