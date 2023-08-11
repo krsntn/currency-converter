@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import "./App.css";
 import {
   Table,
@@ -17,6 +17,7 @@ const App = () => {
   const [rate, setRate] = useState(2);
   const [gap, setGap] = useState(10);
   const [tableValues, setTableValues] = useState([]);
+  const scrollRef = useRef(null);
 
   const debouncedInputValue = useDebounce(inputValue, 600);
   const debouncedRateValue = useDebounce(rate, 600);
@@ -51,6 +52,8 @@ const App = () => {
     for (let i = inputNum, x = 10; x >= 0; i += gapNum, x--) {
       arr.push([i, i * debouncedRateValue]);
     }
+
+    scrollRef.current.scrollTop = scrollRef.current.scrollHeight / 2.5;
 
     setTableValues(arr);
   }, [debouncedInputValue, debouncedRateValue, debouncedGapValue]);
@@ -96,7 +99,7 @@ const App = () => {
         />
       </div>
 
-      <div className="overflow-auto max-h-[60vh] no-scrollbar">
+      <div className="overflow-auto max-h-[60vh] no-scrollbar" ref={scrollRef}>
         <Table>
           <TableHeader>
             <TableRow>
