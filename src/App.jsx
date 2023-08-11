@@ -86,7 +86,7 @@ const App = () => {
   });
 
   return (
-    <div className="p-6 m-auto min-h-screen w-full max-w-lg flex flex-col justify-between">
+    <div className="p-6 m-auto min-h-[100dvh] w-full max-w-lg flex flex-col justify-between">
       <div className="grid items-center gap-2">
         <Label htmlFor="fc">Foreign Currency</Label>
         <Input
