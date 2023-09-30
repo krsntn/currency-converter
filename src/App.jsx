@@ -94,6 +94,7 @@ const App = () => {
           type="number"
           inputMode="decimal"
           value={inputValue}
+          onFocus={(e) => e.target.select()}
           onChange={inputValueChanged}
           className="text-center text-lg h-14"
         />
@@ -137,6 +138,7 @@ const App = () => {
             type="number"
             inputMode="numeric"
             value={gap}
+            onFocus={(e) => e.target.select()}
             onChange={gapChanged}
             className="text-center text-lg"
           />
@@ -148,6 +150,7 @@ const App = () => {
             type="number"
             inputMode="decimal"
             value={rate}
+            onFocus={(e) => e.target.select()}
             onChange={rateChanged}
             className="text-center text-lg"
           />
