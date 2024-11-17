@@ -87,17 +87,32 @@ const App = () => {
 
   return (
     <div className="p-6 m-auto min-h-[100dvh] w-full max-w-lg flex flex-col justify-between">
-      <div className="grid items-center gap-2">
-        <Label htmlFor="fc">Foreign Currency</Label>
-        <Input
-          id="fc"
-          type="number"
-          inputMode="decimal"
-          value={inputValue}
-          onFocus={(e) => e.target.select()}
-          onChange={inputValueChanged}
-          className="text-center text-lg h-14"
-        />
+      <div className="grid items-center gap-4">
+        <div className="grid items-center gap-2">
+          <Label htmlFor="fc">Foreign Currency</Label>
+          <Input
+            id="fc"
+            type="number"
+            inputMode="decimal"
+            value={inputValue}
+            onFocus={(e) => e.target.select()}
+            onChange={inputValueChanged}
+            className="text-center text-lg"
+          />
+        </div>
+
+        <div className="grid items-center gap-2">
+          <Label htmlFor="rate">Exchange Rate</Label>
+          <Input
+            id="rate"
+            type="number"
+            inputMode="decimal"
+            value={rate}
+            onFocus={(e) => e.target.select()}
+            onChange={rateChanged}
+            className="text-center text-lg"
+          />
+        </div>
       </div>
 
       <div className="overflow-auto max-h-[60vh] no-scrollbar" ref={scrollRef}>
@@ -130,31 +145,17 @@ const App = () => {
         </Table>
       </div>
 
-      <div className="w-full max-w-lg flex gap-2">
-        <div className="grid items-center gap-2">
-          <Label htmlFor="gap">Gap</Label>
-          <Input
-            id="gap"
-            type="number"
-            inputMode="numeric"
-            value={gap}
-            onFocus={(e) => e.target.select()}
-            onChange={gapChanged}
-            className="text-center text-lg"
-          />
-        </div>
-        <div className="grid items-center gap-2">
-          <Label htmlFor="rate">Currency Rate</Label>
-          <Input
-            id="rate"
-            type="number"
-            inputMode="decimal"
-            value={rate}
-            onFocus={(e) => e.target.select()}
-            onChange={rateChanged}
-            className="text-center text-lg"
-          />
-        </div>
+      <div className="grid items-center gap-2">
+        <Label htmlFor="gap">Gap</Label>
+        <Input
+          id="gap"
+          type="number"
+          inputMode="numeric"
+          value={gap}
+          onFocus={(e) => e.target.select()}
+          onChange={gapChanged}
+          className="text-center text-lg"
+        />
       </div>
     </div>
   );
