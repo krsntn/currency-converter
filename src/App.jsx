@@ -115,7 +115,10 @@ const App = () => {
         </div>
       </div>
 
-      <div className="overflow-auto max-h-[60vh] no-scrollbar" ref={scrollRef}>
+      <div
+        className="overflow-auto h-[calc(100dvh-266px)] no-scrollbar"
+        ref={scrollRef}
+      >
         <Table>
           <TableHeader>
             <TableRow>
@@ -145,7 +148,7 @@ const App = () => {
         </Table>
       </div>
 
-      <div className="grid items-center gap-2">
+      <div className="grid items-center gap-2 shrink-0">
         <Label htmlFor="gap">Gap</Label>
         <Input
           id="gap"
