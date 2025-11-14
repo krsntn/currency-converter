@@ -65,7 +65,8 @@ const App = () => {
 
         <div className="border border-gray-200 rounded-lg p-4">
           <div className="grid grid-cols-2 items-center gap-2">
-            {inputValue.split("").includes("+" || "-") ? (
+            {inputValue.split("").includes("+") ||
+            inputValue.split("").includes("-") ? (
               <>
                 <div />
                 <div className="text-xs">{inputValue}</div>
