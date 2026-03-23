@@ -25,9 +25,13 @@ const App = () => {
   const inputValueChanged = (value) => {
     setInputValue(value);
     if (value.slice(-1).match(/\d/)) {
-      const result = eval(value);
-      if (result) {
-        setOutput(result);
+      try {
+        const result = eval(value);
+        if (typeof result === "number") {
+          setOutput(result);
+        }
+      } catch (e) {
+        console.error("Eval error", e);
       }
     } else if (value.length === 0) {
       setOutput(0);
@@ -65,8 +69,7 @@ const App = () => {
 
         <div className="border border-gray-200 rounded-lg p-4">
           <div className="grid grid-cols-2 items-center gap-2">
-            {inputValue.split("").includes("+") ||
-            inputValue.split("").includes("-") ? (
+            {/[+\-*/]/.test(inputValue) ? (
               <>
                 <div />
                 <div className="text-xs">{inputValue}</div>

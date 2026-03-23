@@ -13,13 +13,11 @@ const Numpad = ({ onInputChange, hide, onReverse }) => {
       if (input.length !== 0 && !input.includes(".")) {
         setInput((prev) => prev.concat("."));
       }
-    } else if (value === "↕") {
-      onReverse();
-    } else if (value === "+" || value === "-") {
+    } else if (["+", "-", "*", "/"].includes(value)) {
       const lastChar = input.slice(-1);
       if (lastChar.match(/\d/)) {
         setInput((prev) => prev.concat(value));
-      } else if (lastChar !== value) {
+      } else if (["+", "-", "*", "/"].includes(lastChar)) {
         setInput((prev) => prev.slice(0, -1).concat(value));
       }
     } else {
@@ -31,7 +29,7 @@ const Numpad = ({ onInputChange, hide, onReverse }) => {
     onInputChange(input);
   }, [input, onInputChange]);
 
-  const buttons = [
+  const numbers = [
     "7",
     "8",
     "9",
@@ -39,29 +37,42 @@ const Numpad = ({ onInputChange, hide, onReverse }) => {
     "4",
     "5",
     "6",
-    "+",
     "1",
     "2",
     "3",
-    "-",
     "C",
-    "0",
     ".",
-    "↕",
+    "0",
   ];
+
+  const operators = ["/", "*", "-", "+"];
 
   return (
     <div
       className={`p-4 mx-auto rounded-lg w-full ${hide ? "hidden" : "block"}`}
     >
-      <div className="grid grid-cols-4 gap-4">
-        {buttons.map((button) => {
+      <div className="grid grid-cols-4 gap-2 mb-2">
+        {operators.map((button) => {
           return (
             <Button
               key={button}
-              variant="link"
+              variant="outline"
               onClick={() => handleButtonClick(button)}
-              className="h-14"
+              className={`h-14`}
+            >
+              {button}
+            </Button>
+          );
+        })}
+      </div>
+      <div className="grid grid-cols-4 gap-2">
+        {numbers.map((button) => {
+          return (
+            <Button
+              key={button}
+              variant={button === "C" ? "destructive" : "outline"}
+              onClick={() => handleButtonClick(button)}
+              className={`min-h-14 h-full ${["<", "C"].includes(button) ? "row-span-2" : ""} ${button === "0" ? "col-span-2" : ""}`}
             >
               {button}
             </Button>
